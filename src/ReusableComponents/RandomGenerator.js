@@ -1,42 +1,63 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { Text, View, Button, StyleSheet } from "react-native";
 import ColorCounter from "../ReusableComponents/ColorCounter";
 
+const reducer = (state, action) => {
+  switch (action.colorToChange) {
+    case "red":
+      //never goin to do :state.red = state.red + 15
+      return { ...state, red: state.red + action.amount };
+    case "green":
+      return { ...state, green: state.green + action.amount };
+    case "blue":
+      return { ...state, blue: state.blue + action.amount };
+
+    default:
+  }
+};
 const RandomGenerator = () => {
-  const [red, setRed] = useState(0);
-  const [green, setGreen] = useState(0);
-  const [blue, setBlue] = useState(0);
-  console.log("red :", red, "green:", green, "blue :", blue);
+  const COLOR_INCREAMENT = 15;
+
+  const [state, dispatch] = useReducer(
+    reducer,{red: 0,green: 0 ,blue: 0}
+  );
+
   return (
     <View>
       <ColorCounter
         onIncrease={() => {
-          setRed(red+1);
+          dispatch({ colorToChange: "red", amount: COLOR_INCREAMENT });
         }}
         onDecrease={() => {
-          setRed(red-1);
+          dispatch({ colorToChange: "red", amount: -1 * COLOR_INCREAMENT });
         }}
         color="Red"
       ></ColorCounter>
       <ColorCounter
         onIncrease={() => {
-          setGreen(green+1);
+          dispatch({ colorToChange: "blue", amount: COLOR_INCREAMENT });
         }}
         onDecrease={() => {
-          setGreen(green-1);
+          dispatch({ colorToChange: "blue", amount: -1 * COLOR_INCREAMENT });
         }}
         color="Blue"
       ></ColorCounter>
       <ColorCounter
         onIncrease={() => {
-          setBlue(blue+1);
+          dispatch({ colorToChange: "green", amount: COLOR_INCREAMENT });
         }}
         onDecrease={() => {
-          setBlue(blue-1);
+          dispatch({ colorToChange: "green", amount: -1 * COLOR_INCREAMENT });
         }}
         color="Green"
       ></ColorCounter>
-      <View style = {{height : 150 , width : 150 , backgroundColor : `rgb(${red},${green},${blue})`}}/>
+      <View
+        style={{
+          height: 150,
+          width: 150,
+          backgroundColor: `rgb(${state.red},${state.green},${state.blue})`,
+        }}
+      />
     </View>
   );
 };
