@@ -5,6 +5,8 @@ import FriendsListComponent from "../FriendsListComponent";
 import ImageScreenComponent from "../ImageScreenComponent";
 import CounterComponent from "../ReusableComponents/CounterComponent"
 import RandomGenerator from '../ReusableComponents/RandomGenerator'
+import TextComponent from '../ReusableComponents/TextComponent'
+import BoxModelComponent from '../boxModel/boxModelComponent'
 const Screens = {
   Home: {
     screen: HelloWorldComponent,
@@ -20,6 +22,12 @@ const Screens = {
   },
   Random :{
     screen: RandomGenerator
+  },
+  TextInput :{
+    screen: TextComponent
+  },
+  BoxModel : {
+    screen: BoxModelComponent
   }
 };
 const homeStack = createStackNavigator(Screens);

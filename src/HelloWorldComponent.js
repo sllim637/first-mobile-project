@@ -29,6 +29,18 @@ const HelloWorldComponent = ({ navigation }) => {
           navigation.navigate('Random');
         }}
       />
+      <Button
+        title="go to Text Input Component"
+        onPress={() => {
+          navigation.navigate('TextInput');
+        }}
+      />
+      <Button
+        title="go to box model component"
+        onPress={() => {
+          navigation.navigate('BoxModel');
+        }}
+      />
     </View>
   );
 };
